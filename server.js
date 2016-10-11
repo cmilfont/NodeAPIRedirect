@@ -7,7 +7,7 @@ var port = process.env.PORT || 3000;
 var apiUrl = process.argv[2] || 'https://beta.greenmile.com';
 
 // Where your static files are
-var frontEndFiles = '/Users/cmilfont/projetos/gm-server/src/main/webapp/gm-live/src';
+var frontEndFiles = '/Users/cmilfont/projetos/gm-live/src';
 
 app.use(express.static('files'));
 
@@ -55,4 +55,6 @@ app.listen(80);
 console.log ('Server target: ' + apiUrl);
 console.log ('Front-end folder: ' + frontEndFiles);
 console.log ('API server running since ' + new Date());
+
+
 
