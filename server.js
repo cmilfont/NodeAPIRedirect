@@ -7,25 +7,25 @@ var port = process.env.PORT || 3000;
 var apiUrl = process.argv[2] || 'https://beta.greenmile.com';
 
 // Where your static files are
-var frontEndFiles = '/Users/cmilfont/projetos/gm-live/src';
+var frontEndFiles = '/Users/cmilfont/cursos/gm-live/src';
 
 app.use(express.static('files'));
 
 app.use('/login', function(req, res){
   var url = apiUrl + "/login";
   req.pipe(request(url, function(err, response, body){
-    
+
     var body = {};
-    
+
     console.log("RETORNO DO LOGIN", body);
-    
+
     try {
       //body = JSON.parse(body);
-      body.targetUrl = "http://dev.greenmile.com/index"      
+      body.targetUrl = "http://dev.greenmile.com/index"
     } catch (e) {
       console.log(e);
     }
-    
+
     res.json(body);
     return body;
   }));
@@ -37,7 +37,9 @@ app.use('/index', express.static(frontEndFiles + '/index.html'));
 app.use('/server_down', express.static(frontEndFiles + '/server_down.html'));
 
 // Mapping your static files
+app.use('/worker.js', express.static(frontEndFiles + '/resources/javascripts/worker.js'));
 app.use('/resources/javascripts/', express.static(frontEndFiles + '/resources/javascripts'));
+app.use('/dist/', express.static(frontEndFiles + '/dist'));
 app.use('/resources/stylesheets/', express.static(frontEndFiles + '/resources/stylesheets'));
 app.use('/resources/images/', express.static(frontEndFiles + '/resources/images'));
 app.use('/resources/fonts/', express.static(frontEndFiles + '/resources/fonts'));
@@ -55,6 +57,3 @@ app.listen(80);
 console.log ('Server target: ' + apiUrl);
 console.log ('Front-end folder: ' + frontEndFiles);
 console.log ('API server running since ' + new Date());
-
-
-
